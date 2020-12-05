@@ -4,6 +4,8 @@ const { name, prefix } = require("./config.json");
 const dadContent = require("./content.json");
 
 const jokeLength = Object.keys(dadContent.joke).length;
+const pickupLength = Object.keys(dadContent.pickup).length;
+
 
 const bot = new Discord.Client();
 
@@ -48,7 +50,18 @@ bot.on("message", (message) => {
 			`dad joke in ${message.guild.name} with guild ID ${message.guild.id}`,
 		);
 		console.log(`Dad joke was: ${dadJoke}`);
-		return message.channel.send(dadContent.joke[jokeId]);
+		return message.channel.send(dadJoke);
+	}
+
+	//Dad pickup lines
+	if (message.content.toLowerCase() == `${prefix} pickup`) {
+		pickupId = Math.floor(Math.random() * pickupLength) + 1;
+		dadPickup = dadContent.pickup[pickupId];
+		console.log(
+			`dad pickup in ${message.guild.name} with guild ID ${message.guild.id}`,
+		);
+		console.log(`Dad pickup was: ${dadPickup}`);
+		return message.channel.send(dadPickup);
 	}
 });
 
