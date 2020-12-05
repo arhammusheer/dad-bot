@@ -16,10 +16,14 @@ bot.once("ready", () => {
 bot.on("message", (message) => {
 	//Dad's classic response
 	if (message.content.toLowerCase().startsWith("i'm ")) {
-		console.log(
-			`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
-		);
-		return message.channel.send(`Hi ${message.content.substring(4)}, I'm Dad`);
+		if (message.content.toLowerCase().split(" ").length < 6) {
+			console.log(
+				`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
+			);
+			return message.channel.send(
+				`Hi ${message.content.substring(4)}, I'm Dad`,
+			);
+		}
 	}
 
 	//Dad bot invite
@@ -44,7 +48,7 @@ bot.on("message", (message) => {
 			`dad joke in ${message.guild.name} with guild ID ${message.guild.id}`,
 		);
 		console.log(`Dad joke was: ${dadJoke}`);
-        return message.channel.send(dadContent.joke[jokeId]);
+		return message.channel.send(dadContent.joke[jokeId]);
 	}
 });
 
