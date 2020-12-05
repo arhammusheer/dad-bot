@@ -48,5 +48,9 @@ bot.on("message", (message) => {
 	}
 });
 
+bot.on("guildCreate", (guild) => {
+	console.log(`Joined a new guild: ${guild.name} with ID ${guild.id}`);
+});
+
 //Log into discord
 bot.login(process.env.DISCORD_TOKEN);
