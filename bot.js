@@ -2,10 +2,11 @@ require("dotenv").config();
 const Discord = require("discord.js");
 const { name, prefix } = require("./config.json");
 const dadContent = require("./content.json");
+const fetch = require("node-fetch");
 
 const jokeLength = Object.keys(dadContent.joke).length;
 const pickupLength = Object.keys(dadContent.pickup).length;
-
+const classicResponseTriggers = ["i am", "i'm", "im"];
 
 const bot = new Discord.Client();
 
@@ -16,18 +17,39 @@ bot.once("ready", () => {
 
 //On discord message
 bot.on("message", (message) => {
+	if (
+		message.content.toLowerCase().startsWith("i'm, i'm") ||
+		message.content.toLowerCase().startsWith("i'm i'm")
+	) {
+		console.log(
+			`Classic dad response rickroll in ${message.guild.name} with guild ID ${message.guild.id}`,
+		);
+		return message.channel.send(`Bich You can't fool me`);
+	}
+	classicResponseTriggers.some((response) => {
+		if (message.content.toLowerCase().startsWith(response)) {
+			if (message.content.toLowerCase().split(" ").length < 10) {
+				console.log(
+					`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
+				);
+				console.log(response);
+				return message.channel.send(
+					`Hi ${message.content.substring(response.length)}, I'm Dad`,
+				);
+			}
+		}
+	});
+	/*
 	//Dad's classic response
-	if (message.content.toLowerCase().startsWith("i'm ")) {
-		if (message.content.toLowerCase().split(" ").length < 6) {
+	if (message.content.toLowerCase().startsWith(response)) {
+		if (message.content.toLowerCase().split(" ").length < 10) {
 			console.log(
 				`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
 			);
-			return message.channel.send(
-				`Hi ${message.content.substring(4)}, I'm Dad`,
-			);
+			return message.channel.send(`Hi ${message.content.substring()}, I'm Dad`);
 		}
 	}
-
+	*/
 	//Dad bot invite
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 
@@ -62,6 +84,19 @@ bot.on("message", (message) => {
 		);
 		console.log(`Dad pickup was: ${dadPickup}`);
 		return message.channel.send(dadPickup);
+	}
+
+	if (message.content.toLowerCase() == `${prefix} roast`) {
+		fetch(process.env.INSULT_API_URL)
+			.then((res) => res.json())
+			.then((data) => {
+				roast = data.insult;
+				console.log(
+					`dad roast in ${message.guild.name} with guild ID ${message.guild.id}`,
+				);
+				console.log(`Dad roast was: ${roast}`);
+				message.channel.send(roast);
+			});
 	}
 });
 
