@@ -107,7 +107,7 @@ bot.on("message", (message) => {
 				{ name: "Prefix", value: "dad" },
 				{
 					name: "Commands",
-					value: "`joke``pickup``roast``help`",
+					value: "`joke`, `pickup`, `roast`, `help`",
 				},
 			),
 		);
