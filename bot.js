@@ -29,27 +29,24 @@ bot.on("message", (message) => {
 	classicResponseTriggers.some((response) => {
 		if (message.content.toLowerCase().startsWith(response)) {
 			if (message.content.toLowerCase().split(" ").length < 10) {
+				if (message.content.toLowerCase().substring(response.length + 1) == "dad"||message.content.toLowerCase().substring(response.length + 1) == "dad-bot") {
+					console.log(
+						`Classic dad response comeback in ${message.guild.name} with guild ID ${message.guild.id}`,
+					);
+					return message.channel.send(
+						`No BICH I am dad bot`,
+					);
+				}
 				console.log(
-					`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
-				);
+						`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
+					);
 				console.log(response);
 				return message.channel.send(
-					`Hi ${message.content.substring(response.length)}, I'm Dad`,
+					`Hi ${message.content.substring(response.length+1)}, I'm Dad`,
 				);
 			}
 		}
 	});
-	/*
-	//Dad's classic response
-	if (message.content.toLowerCase().startsWith(response)) {
-		if (message.content.toLowerCase().split(" ").length < 10) {
-			console.log(
-				`Classic dad response in ${message.guild.name} with guild ID ${message.guild.id}`,
-			);
-			return message.channel.send(`Hi ${message.content.substring()}, I'm Dad`);
-		}
-	}
-	*/
 	//Dad bot invite
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 
