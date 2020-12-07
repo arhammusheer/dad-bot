@@ -19,7 +19,8 @@ bot.once("ready", () => {
 bot.on("message", (message) => {
 	if (
 		message.content.toLowerCase().startsWith("i'm, i'm") ||
-		message.content.toLowerCase().startsWith("i'm i'm")
+		message.content.toLowerCase().startsWith("i'm i'm") ||
+		message.content.toLowerCase().startsWith("im im")
 	) {
 		console.log(
 			`Classic dad response rickroll in ${message.guild.name} with guild ID ${message.guild.id}`,
