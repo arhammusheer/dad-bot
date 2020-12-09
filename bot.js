@@ -49,13 +49,13 @@ bot.on("message", (message) => {
 						console.log(
 							`Classic dad response comeback in ${message.guild.name} with guild ID ${message.guild.id}`,
 						);
+						return message.channel.send(`No BICH I am dad bot`);
 					} else {
 						console.log(
 							`Classic dad response comeback in ${message.author.username}'s DM`,
 						);
+						return message.channel.send("Bruh  You do know there's no point of me tryna pull that off in DMs")
 					}
-
-					return message.channel.send(`No BICH I am dad bot`);
 				}
 				if (message.guild) {
 					console.log(
