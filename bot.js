@@ -16,7 +16,7 @@ bot.once("ready", () => {
 });
 
 //On discord message
-bot.on("message", (message) => {
+bot.on("message", async (message) => {
 	if (
 		message.content.toLowerCase().startsWith("i'm, i'm") ||
 		message.content.toLowerCase().startsWith("i'm i'm") ||
@@ -39,11 +39,11 @@ bot.on("message", (message) => {
 			if (message.content.toLowerCase().split(" ").length < 10) {
 				if (
 					message.content.toLowerCase().substring(response.length + 1) ==
-						"dad" ||
+					"dad" ||
 					message.content.toLowerCase().substring(response.length + 1) ==
-						"dad-bot" ||
+					"dad-bot" ||
 					message.content.toLowerCase().substring(response.length + 1) ==
-						"dad bot"
+					"dad bot"
 				) {
 					if (message.guild) {
 						console.log(
@@ -95,8 +95,7 @@ bot.on("message", (message) => {
 
 	//Dad jokes
 	if (message.content.toLowerCase() == `${prefix} joke`) {
-		jokeId = Math.floor(Math.random() * jokeLength) + 1;
-		dadJoke = dadContent.joke[jokeId];
+		dadJoke = dad_joke()
 		if (message.guild) {
 			console.log(
 				`dad joke in ${message.guild.name} with guild ID ${message.guild.id}`,
@@ -111,8 +110,7 @@ bot.on("message", (message) => {
 
 	//Dad pickup lines
 	if (message.content.toLowerCase() == `${prefix} pickup`) {
-		pickupId = Math.floor(Math.random() * pickupLength) + 1;
-		dadPickup = dadContent.pickup[pickupId];
+		dadPickup = dad_pickup()
 		if (message.guild) {
 			console.log(
 				`dad pickup in ${message.guild.name} with guild ID ${message.guild.id}`,
@@ -161,5 +159,86 @@ bot.on("guildCreate", (guild) => {
 	console.log(`Joined a new guild: ${guild.name} with ID ${guild.id}`);
 });
 
+bot.ws.on('INTERACTION_CREATE', async interaction => {
+	//Dad joke
+	if (interaction.data.name == "joke") {
+		bot.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: dad_joke()
+				}
+			}
+		})
+	}
+	//Dad pickup
+	if (interaction.data.name == "pickup") {
+		bot.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: dad_pickup()
+				}
+			}
+		})
+	}
+
+	//Dad Invite
+	if (interaction.data.name == "invite") {
+		bot.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data: {
+					content: dad_invite()
+				}
+			}
+		})
+	}
+
+	//Dad roast
+	if (interaction.data.name == "roast") {
+		fetch(process.env.INSULT_API_URL)
+			.then((res) => res.json())
+			.then((data) => {
+				roast = data.insult;
+
+				bot.api.interactions(interaction.id, interaction.token).callback.post({
+					data: {
+						type: 4,
+						data: {
+							content: roast
+						}
+					}
+				})
+
+			});
+	}
+})
+
 //Log into discord
 bot.login(process.env.DISCORD_TOKEN);
+
+function dad_joke() {
+	jokeId = Math.floor(Math.random() * jokeLength) + 1;
+	dadJoke = dadContent.joke[jokeId];
+	return dadJoke
+}
+
+function dad_pickup() {
+	pickupId = Math.floor(Math.random() * pickupLength) + 1;
+	dadPickup = dadContent.pickup[pickupId];
+	return dadPickup;
+}
+
+async function dad_roast() {
+	await fetch(process.env.INSULT_API_URL)
+		.then((res) => res.json())
+		.then((data) => {
+			roast = data.insult;
+			return roast;
+		});
+}
+
+function dad_invite() {
+	return process.env.DISCORD_INVITE_LINK
+}
