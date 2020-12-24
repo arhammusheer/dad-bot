@@ -1,9 +1,9 @@
 # dad-bot
 ## A very dumb useless bot for your discord server
 
-Add this bot to your server for free by clicking [here](https://discord.com/api/oauth2/authorize?client_id=784868111609364530&permissions=67492929&scope=bot) or using the following link
+Add this bot to your server for free by clicking [here](https://discord.com/api/oauth2/authorize?client_id=784868111609364530&permissions=0&scope=bot%20applications.commands) or using the following link
 
-https://discord.com/api/oauth2/authorize?client_id=784868111609364530&permissions=67492929&scope=bot
+https://discord.com/api/oauth2/authorize?client_id=784868111609364530&permissions=0&scope=bot%20applications.commands
 
 # Host your own dad bot
 
