@@ -154,7 +154,7 @@ bot.on("message", async (message) => {
             .then((data) => {
                 roast = data.insult;
                 if (message.guild) {
-                    console.log(t
+                    console.log(
                         `dad roast in ${message.guild.name} with guild ID ${message.guild.id}`,
                     );
                 } else {
