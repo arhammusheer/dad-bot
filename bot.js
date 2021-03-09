@@ -45,13 +45,13 @@ bot.on("message", async (message) => {
       if (message.content.toLowerCase().startsWith(response)) {
         if (message.content.toLowerCase().split(" ").length < 10) {
           if (
-            message.content.toLowerCase().substring(response.length + 1) ==
+            message.content.toLowerCase().substring(response.length) ==
               "daddy" ||
-            message.content.toLowerCase().substring(response.length + 1) ==
+            message.content.toLowerCase().substring(response.length) ==
               "dad" ||
-            message.content.toLowerCase().substring(response.length + 1) ==
+            message.content.toLowerCase().substring(response.length) ==
               "dad-bot" ||
-            message.content.toLowerCase().substring(response.length + 1) ==
+            message.content.toLowerCase().substring(response.length) ==
               "dad bot"
           ) {
             if (message.guild) {
