@@ -40,15 +40,14 @@ bot.on("message", async (message) => {
 
     return message.channel.send(`Bich You can't fool me`);
   }
-  if (Math.random() <= 0.4) {
+  if (Math.random() <= 0.15) {
     classicResponseTriggers.some((response) => {
       if (message.content.toLowerCase().startsWith(response)) {
         if (message.content.toLowerCase().split(" ").length < 10) {
           if (
             message.content.toLowerCase().substring(response.length) ==
               "daddy" ||
-            message.content.toLowerCase().substring(response.length) ==
-              "dad" ||
+            message.content.toLowerCase().substring(response.length) == "dad" ||
             message.content.toLowerCase().substring(response.length) ==
               "dad-bot" ||
             message.content.toLowerCase().substring(response.length) ==
@@ -79,8 +78,14 @@ bot.on("message", async (message) => {
           }
 
           console.log(response);
-          if (message.mentions.members.first())
+          if (message.mentions.members.first()) {
+            if (Math.random() <= 0.1) {
+              return message.channel.send(
+                `Hi ${message.content.substring(response.length)}, I'm Dad`
+              );
+            }
             return message.reply("Bich I ain't mentioning anyone");
+          }
           return message.channel.send(
             `Hi ${message.content.substring(response.length)}, I'm Dad`
           );
@@ -143,32 +148,6 @@ bot.on("message", async (message) => {
 
     console.log(`Dad pickup was: ${dadPickup}`);
     return message.channel.send(dadPickup);
-  }
-
-  // Bernie sits
-  if (message.content.toLowerCase().startsWith(`${prefix} bernie `)) {
-    let location = message.content.substring(`${prefix} bernie `.length);
-    let params = new URLSearchParams();
-    params.append("address/location", location);
-    fetch("http://bernie-sits.herokuapp.com/", {
-      method: "POST",
-      body: params,
-    })
-      .then((res) => res.text())
-      .then((body) => {
-        var dom = new JSDOM(body);
-        var bernieImage = dom.window.document
-          .getElementById("picture")
-          .src.split(";base64,")
-          .pop();
-        message.channel.send({
-          files: [
-            {
-              attachment: new Buffer.from(bernieImage, "base64"),
-            },
-          ],
-        });
-      });
   }
 
   if (message.content.toLowerCase() == `${prefix} roast`) {
