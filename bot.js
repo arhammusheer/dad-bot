@@ -40,11 +40,13 @@ bot.on("message", async (message) => {
 
     return message.channel.send(`Bich You can't fool me`);
   }
-  if (Math.random() <= 0.15) {
+  if (Math.random() <= 0.3) {
     classicResponseTriggers.some((response) => {
       if (message.content.toLowerCase().startsWith(response)) {
         if (message.content.toLowerCase().split(" ").length < 10) {
           if (
+            message.content.toLowerCase().substring(response.length) ==
+              "father" ||
             message.content.toLowerCase().substring(response.length) ==
               "daddy" ||
             message.content.toLowerCase().substring(response.length) == "dad" ||
@@ -79,7 +81,7 @@ bot.on("message", async (message) => {
 
           console.log(response);
           if (message.mentions.members.first()) {
-            if (Math.random() <= 0.1) {
+            if (Math.random() <= 0.2) {
               return message.channel.send(
                 `Hi ${message.content.substring(response.length)}, I'm Dad`
               );
