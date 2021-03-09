@@ -81,7 +81,7 @@ bot.on("message", async (message) => {
 
           console.log(response);
           if (message.mentions.members.first()) {
-            if (Math.random() <= 0.2) {
+            if (Math.random() <= 0.4) {
               return message.channel.send(
                 `Hi ${message.content.substring(response.length)}, I'm Dad`
               );
