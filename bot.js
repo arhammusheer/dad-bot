@@ -80,7 +80,7 @@ bot.on("message", async (message) => {
 
           console.log(response);
           if (message.mentions.members.first())
-            return message.channel.send("Bich I ain't mentioning anyone");
+            return message.reply("Bich I ain't mentioning anyone");
           return message.channel.send(
             `Hi ${message.content.substring(response.length)}, I'm Dad`
           );
