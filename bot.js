@@ -92,6 +92,13 @@ bot.on("message", async (message) => {
   //Dad bot invite
   if (!message.content.toLowerCase().startsWith(prefix)) return;
 
+  //Dad bot
+  if (message.content.toLowerCase() === `${prefix} bot`) {
+    return message.channel.send(
+      "Yuh, say `dad help` to get help. Looks like you really need some"
+    );
+  }
+
   if (message.content.toLowerCase() == `${prefix} invite`) {
     if (message.guild) {
       console.log(
