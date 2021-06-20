@@ -3,14 +3,11 @@ const Discord = require("discord.js");
 const { name, prefix } = require("./config.json");
 const dadContent = require("./content.json");
 const fetch = require("node-fetch");
-const { URLSearchParams } = require("url");
-const jsdom = require("jsdom");
-const fs = require("fs");
-
-const { JSDOM } = jsdom;
 
 const jokeLength = Object.keys(dadContent.joke).length;
 const pickupLength = Object.keys(dadContent.pickup).length;
+const goodJokeLength = Object.keys(dadContent.goodJoke).length;
+
 const classicResponseTriggers = ["imma ", "i am ", "i'm ", "im "];
 
 const bot = new Discord.Client();
@@ -37,7 +34,6 @@ bot.on("message", async (message) => {
         `Classic dad response rickroll in ${message.author.username}'s DM`
       );
     }
-
     return message.channel.send(`Bich You can't fool me`);
   }
   if (Math.random() <= 0.3) {
@@ -182,6 +178,19 @@ bot.on("message", async (message) => {
       )
     );
   }
+  if (message.content.toLowerCase() == `${prefix} good joke`) {
+    goodJoke = dad_good_joke();
+    if (message.guild) {
+      console.log(
+        `dad good joke in ${message.guild.name} with guild ID ${message.guild.id}`
+      );
+    } else {
+      console.log(`dad good joke in ${message.author.username}'s DM`);
+    }
+
+    console.log(`Dad pickup was: ${goodJoke}`);
+    return message.channel.send(goodJoke);
+  }
 });
 
 bot.on("guildCreate", (guild) => {
@@ -241,6 +250,16 @@ bot.ws.on("INTERACTION_CREATE", async (interaction) => {
         });
       });
   }
+  if (interaction.data.name == "good joke") {
+    bot.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          content: dad_good_joke(),
+        },
+      },
+    });
+  }
 });
 
 //Log into discord
@@ -265,6 +284,12 @@ async function dad_roast() {
       roast = data.insult;
       return roast;
     });
+}
+
+function dad_good_joke() {
+  goodJokeId = Math.floor(Math.random() * goodJokeLength) + 1;
+  goodJoke = dadContent.goodJoke[goodJokeId];
+  return goodJoke;
 }
 
 function dad_invite() {
