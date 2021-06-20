@@ -173,7 +173,7 @@ bot.on("message", async (message) => {
         { name: "Prefix", value: "dad" },
         {
           name: "Commands",
-          value: "`joke`, `pickup`, `roast`, `help`",
+          value: "`joke`, `pickup`, `roast`, `help`, `good joke`",
         }
       )
     );
