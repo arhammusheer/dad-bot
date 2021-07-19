@@ -10,16 +10,26 @@ const client = new CommandoClient({
   invite: config.invite,
 });
 
-client.registry
-  .registerDefaultTypes()
-  .registerDefaultGroups()
-  .registerDefaultCommands()
-  .registerGroups([["fun", "A group of fun commands"]])
-  .registerCommandsIn(path.join(__dirname, "./commands"));
-
 client.once("ready", () => {
+  client.registry
+    .registerGroups([["fun", "fun commands"]])
+    .registerDefaults()
+    .registerCommandsIn(path.join(__dirname, "commands"));
+
   console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
   client.user.setActivity("with your mom");
+});
+
+client.on("message", (message) => {
+  if (message.author.bot) return;
+
+  if (
+    message.content.toLowerCase().startsWith("i'm, i'm") ||
+    message.content.toLowerCase().startsWith("i'm i'm") ||
+    message.content.toLowerCase().startsWith("im im")
+  ) {
+    
+  }
 });
 
 client.on("error", console.error);
