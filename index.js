@@ -28,7 +28,6 @@ client.on("message", (message) => {
     message.content.toLowerCase().startsWith("i'm i'm") ||
     message.content.toLowerCase().startsWith("im im")
   ) {
-    
   }
 });
 
