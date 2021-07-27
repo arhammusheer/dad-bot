@@ -14,7 +14,7 @@ module.exports = class InviteCommand extends Command {
   run(msg) {
     return msg.reply(`Use this link to invite me to your server: 
 		
-		https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot+applications.commands&permissions=2048
+https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&scope=bot+applications.commands&permissions=2048
 		`);
   }
 };

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/arhammusheer/dad-bot#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "discord.js": "^12.5.3",
     "discord.js-commando": "github:discordjs/Commando",
     "dotenv": "^10.0.0"

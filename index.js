@@ -22,7 +22,9 @@ client.once("ready", () => {
 
 client.on("message", (message) => {
   if (message.author.bot) return;
-
+  if (message.content.startsWith(config.prefix)) {
+    message.channel.createInvite()
+  }
   if (
     message.content.toLowerCase().startsWith("i'm, i'm") ||
     message.content.toLowerCase().startsWith("i'm i'm") ||
