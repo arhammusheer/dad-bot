@@ -8,6 +8,10 @@ module.exports = class InviteCommand extends Command {
       memberName: "invite",
       description: "Sends you the invite link for this bot",
       examples: ["invite"],
+      throttling: {
+        usages: 1,
+        duration: 3,
+      },
     });
   }
 

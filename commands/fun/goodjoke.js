@@ -19,6 +19,10 @@ module.exports = class GoodJokeCommand extends Command {
       memberName: "goodjoke",
       description: "A slightly offensive joke",
       examples: ["goodjoke"],
+      throttling: {
+        usages: 1,
+        duration: 3,
+      },
     });
   }
 
@@ -26,8 +30,16 @@ module.exports = class GoodJokeCommand extends Command {
     return goodJoke[Math.floor(Math.random() * goodJokeLength)];
   }
 
+  logging(msg) {
+    if (msg.guild) return console.info(`Dad joke invoked in ${msg.guild}`);
+    return console.info(
+      `Dad joke invoked in ${msg.author.username}#${msg.author.discriminator} DM`
+    );
+  }
+
   async run(msg) {
     const embed = new MessageEmbed();
+    this.logging(msg);
     embed.setTitle("A good joke").setDescription(this.randomGoodJoke());
     return msg.channel.send(embed);
   }

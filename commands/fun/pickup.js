@@ -18,6 +18,10 @@ module.exports = class PickupCommand extends Command {
       memberName: "pickup",
       description: "A very cheesy pickup line.",
       examples: ["pickup"],
+      throttling: {
+        usages: 1,
+        duration: 3,
+      },
     });
   }
 

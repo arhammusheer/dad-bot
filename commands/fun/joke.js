@@ -13,6 +13,10 @@ module.exports = class JokeCommand extends Command {
       memberName: "joke",
       description: "Displays a random dad joke",
       examples: ["joke"],
+      throttling: {
+        usages: 1,
+        duration: 3,
+      },
     });
   }
 

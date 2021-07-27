@@ -27,7 +27,7 @@ module.exports = class RoastCommand extends Command {
     return response.data.insult;
   }
 
-  async run(msg, {user}) {
+  async run(msg, { user }) {
     const message = await this.roast();
     return msg.channel.send(`<@${user.id}> ${message}`);
   }
