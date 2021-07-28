@@ -25,11 +25,21 @@ module.exports = class PickupCommand extends Command {
     });
   }
 
+  logging(msg) {
+    if (msg.guild)
+      return console.info(`Dad pickup invoked in ${msg.guild} by${msg.author}`);
+    return console.info(
+      `Dad joke invoked in ${msg.author.username}#${msg.author.discriminator} DM`
+    );
+  }
+
   randomPickup() {
     return pickup[Math.floor(Math.random() * pickupLength)];
   }
 
   async run(msg) {
+    this.logging(msg);
+
     return msg.channel.send(this.randomPickup());
   }
 };

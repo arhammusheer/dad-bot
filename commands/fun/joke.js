@@ -20,11 +20,21 @@ module.exports = class JokeCommand extends Command {
     });
   }
 
+  logging(msg) {
+    if (msg.guild)
+      return console.info(`Dad joke invoked in ${msg.guild} by${msg.author}`);
+    return console.info(
+      `Dad joke invoked in ${msg.author.username}#${msg.author.discriminator} DM`
+    );
+  }
+
   randomJoke() {
     return jokes[Math.floor(Math.random() * jokeLength)];
   }
 
   async run(msg) {
+    this.logging(msg);
+
     return msg.channel.send(this.randomJoke());
   }
 };

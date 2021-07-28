@@ -31,15 +31,19 @@ module.exports = class GoodJokeCommand extends Command {
   }
 
   logging(msg) {
-    if (msg.guild) return console.info(`Dad joke invoked in ${msg.guild}`);
+    if (msg.guild)
+      return console.info(
+        `Dad goodjoke invoked in ${msg.guild} by${msg.author}`
+      );
     return console.info(
-      `Dad joke invoked in ${msg.author.username}#${msg.author.discriminator} DM`
+      `Dad goodjoke invoked in ${msg.author.username}#${msg.author.discriminator} DM`
     );
   }
 
   async run(msg) {
-    const embed = new MessageEmbed();
     this.logging(msg);
+
+    const embed = new MessageEmbed();
     embed.setTitle("A good joke").setDescription(this.randomGoodJoke());
     return msg.channel.send(embed);
   }
